@@ -8,27 +8,37 @@
     <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <form class="search-form" id="search-form">
-      <div class="form__container">
-        <input
-          class="form__input"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search images..."
-        />
-        <button class="form__btn" type="submit">
-          <svg class="form-btn_icon">
-            <use href="./images/search-icon.svg#icon-search"></use>
-          </svg>
-        </button>
-      </div>
-    </form>
+    <div class="preloader">
+      <span class="loader"></span>
+    </div>
+
+    <div class="container">
+      <form class="search-form" id="search-form">
+        <div class="form__container">
+          <input
+            class="form__input"
+            type="text"
+            name="searchQuery"
+            autocomplete="off"
+            placeholder="Search images..."
+          />
+          <button class="form__btn" type="submit">
+            <svg class="form-btn_icon">
+              <use href="./images/search-icon.svg#icon-search"></use>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
 
     <div class="gallery">
       <!-- Картки зображень -->
     </div>
 
-    <!-- <button type="button" id="loadMore" disabled>Load more</button> -->
+    <div class="infitity-scroll"></div>
+
+    <div class="backdrop is-hidden">
+      <div class="spinner js-spinner"></div>
+    </div>
   </body>
 </html>
