@@ -26,15 +26,19 @@ export class PixabayApiImages {
   }
 
   incrementPage() {
-    this.page += 1;
+    return (this.page += 1);
   }
 
   resetPage() {
-    this.page = 1;
+    return (this.page = 1);
   }
 
   setTotal(total) {
     return (this.totalPages = total);
+  }
+
+  resetTotalPage() {
+    return (this.totalPages = 0);
   }
 
   hasMoreImages() {

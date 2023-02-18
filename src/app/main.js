@@ -18,6 +18,7 @@ const lightboxGallery = new SimpleLightbox('.gallery a');
 async function onSubmitForm(e) {
   e.preventDefault();
 
+  observer.observe(refs.infitity);
   clearGallery();
   pixabay.resetPage();
 
@@ -69,25 +70,29 @@ function clearGallery() {
 
 async function onEntry(entries) {
   spinnerPlay();
+
   entries.forEach(async entry => {
     try {
-      if (pixabay.hasMoreImages()) {
-        observer.unobserve(refs.infitity);
-        Notify.info(
-          "We're sorry, but you've reached the end of search results."
-        );
-      }
       if (
         entry.isIntersecting &&
         pixabay.query !== '' &&
         refs.gallery.childElementCount !== 0
       ) {
         pixabay.incrementPage();
-        const { hits } = await pixabay.getImages();
 
+        const { hits } = await pixabay.getImages();
         const markup = createMarkupImg(hits);
         updateMarkup(markup);
+
         spinnerStop();
+
+        if (pixabay.hasMoreImages()) {
+          Notify.info(
+            "We're sorry, but you've reached the end of search results."
+          );
+
+          observer.unobserve(refs.infitity);
+        }
       }
 
       spinnerStop();
@@ -101,8 +106,6 @@ async function onEntry(entries) {
 const observer = new IntersectionObserver(onEntry, {
   rootMargin: '100px',
 });
-
-observer.observe(refs.infitity);
 
 function smoothScroll() {
   const { height: cardHeight } = document
