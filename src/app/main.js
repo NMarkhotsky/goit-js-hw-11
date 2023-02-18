@@ -34,14 +34,14 @@ async function onSubmitForm(e) {
   }
 
   try {
-    const { hits, totalHits, total } = await pixabay.getImages();
+    const { hits, totalHits } = await pixabay.getImages();
+    pixabay.setTotal(totalHits);
+
     if (hits.length === 0) {
       return Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
-
-    // pixabay.setTotal(total);
 
     Notify.success(`Hooray! We found ${totalHits} images.`);
 
@@ -71,6 +71,12 @@ async function onEntry(entries) {
   spinnerPlay();
   entries.forEach(async entry => {
     try {
+      if (pixabay.hasMoreImages()) {
+        observer.unobserve(refs.infitity);
+        Notify.info(
+          "We're sorry, but you've reached the end of search results."
+        );
+      }
       if (
         entry.isIntersecting &&
         pixabay.query !== '' &&
@@ -83,10 +89,10 @@ async function onEntry(entries) {
         updateMarkup(markup);
         spinnerStop();
       }
+
       spinnerStop();
     } catch (error) {
       spinnerStop();
-      Notify.info("We're sorry, but you've reached the end of search results.");
       console.error(error);
     }
   });

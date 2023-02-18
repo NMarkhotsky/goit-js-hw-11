@@ -7,7 +7,7 @@ export class PixabayApiImages {
     this.searchQuery = '';
     this.page = 1;
     this.per_page = 40;
-    // this.totalPages = 0;
+    this.totalPages = 0;
   }
 
   async getImages() {
@@ -33,11 +33,11 @@ export class PixabayApiImages {
     this.page = 1;
   }
 
-  // setTotal(total) {
-  //   this.totalPages = total;
-  // }
+  setTotal(total) {
+    return (this.totalPages = total);
+  }
 
-  // hasMoreImages() {
-  //   return this.page < Math.ceil(this.totalPages / this.per_page);
-  // }
+  hasMoreImages() {
+    return this.page === Math.ceil(this.totalPages / this.per_page);
+  }
 }
