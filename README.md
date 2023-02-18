@@ -8,7 +8,7 @@ https://user-images.githubusercontent.com/17479434/125040406-49a6f600-e0a0-11eb-
 # Форма пошуку
 
 Форма спочатку міститья в HTML документі. Користувач буде вводити рядок для пошуку у текстове поле, а по сабміту форми необхідно виконувати HTTP-запит.
-```
+```html
 <form class="search-form" id="search-form">
   <input
     type="text"
@@ -60,13 +60,13 @@ https://user-images.githubusercontent.com/17479434/125040406-49a6f600-e0a0-11eb-
 # Галерея і картка зображення
 
 Елемент `div.gallery` спочатку міститься в HTML документі, і в нього необхідно рендерити розмітку карток зображень. Під час пошуку за новим ключовим словом необхідно повністю очищати вміст галереї, щоб не змішувати результати.
-```
+```html
 <div class="gallery">
   <!-- Картки зображень -->
 </div>
 ```
 Шаблон розмітки картки одного зображення для галереї.
-```
+```html
 <div class="photo-card">
   <img src="" alt="" loading="lazy" />
   <div class="info">
@@ -99,7 +99,7 @@ https://user-images.githubusercontent.com/17479434/125040406-49a6f600-e0a0-11eb-
 ###
 HTML документ вже містить розмітку кнопки, по кліку на яку, необхідно виконувати запит за наступною групою зображень і додавати розмітку до вже існуючих елементів галереї.
 
-```
+```html
 <button type="button" class="load-more">Load more</button>
 ```
 
@@ -130,7 +130,7 @@ HTML документ вже містить розмітку кнопки, по 
 
 
 
-```
+```js
 import SimpleLightbox from "simplelightbox";
 
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -140,7 +140,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 ### Прокручування сторінки
 
 Зробити плавне прокручування сторінки після запиту і відтворення кожної наступної групи зображень. Ось тобі код-підказка, але розберися у ньому самостійно.
-```
+```js
 const { height: cardHeight } = document
   .querySelector(".gallery")
   .firstElementChild.getBoundingClientRect();
